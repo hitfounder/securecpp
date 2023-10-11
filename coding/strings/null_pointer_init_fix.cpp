@@ -10,7 +10,7 @@ int main() {
         std::cout << tmp;
     }
 
-    const std::string path{gsl::make_not_null(std::getenv("TMP"))};
+    const std::string path{gsl::make_not_null(std::getenv("PATH"))};
     std::cout << path;
     return 0;
 }
