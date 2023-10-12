@@ -1,13 +1,13 @@
+#include <iostream>
 #include <string>
 
 int main() {
-    std::string hello{"Hello"};
-    std::string world{"Woooooooooorld"};
+    std::string str{"hello"};
+    const auto begin{str.begin()};
+    const auto end(str.end());
 
-    const auto begin{world.begin()};
-    const auto end(world.end());
-
-    world.insert(end, std::begin(hello), std::end(hello));
-    world.insert(begin, std::begin(hello), std::end(hello));
+    str.insert(end, 20, '+');
+    str.insert(begin, 20, '-');
+    std::cout << str << std::endl;
     return 0;
 }

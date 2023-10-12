@@ -2,11 +2,10 @@
 #include <string>
 
 int main() {
-    std::string hello{"Hello"};
-    std::string world{"Woooooooooorld"};
+    std::string str{"hello"};
 
-    world.insert(world.end(), std::begin(hello), std::end(hello));
-    world.insert(world.begin(), std::begin(hello), std::end(hello));
-    std::cout << world;
+    str.insert(str.end(), 20, '+');
+    str.insert(str.begin(), 20, '-');
+    std::cout << str << std::endl;
     return 0;
 }
