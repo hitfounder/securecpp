@@ -16,6 +16,7 @@ add_executable(iterator_invalidated_erase_fix strings/iterator_invalidated_erase
 add_executable(out_of_range strings/out_of_range.cpp)
 add_executable(string_view_dangling strings/string_view_dangling.cpp)
 add_executable(string_view_null_termination strings/string_view_null_termination.cpp)
+add_executable(sso_stack_overflow strings/sso_stack_overflow.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
