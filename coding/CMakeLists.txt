@@ -14,6 +14,7 @@ add_executable(iterator_invalidated_insert_fix strings/iterator_invalidated_inse
 add_executable(iterator_invalidated_erase strings/iterator_invalidated_erase.cpp)
 add_executable(iterator_invalidated_erase_fix strings/iterator_invalidated_erase_fix.cpp)
 add_executable(out_of_range strings/out_of_range.cpp)
+add_executable(string_view_dangling strings/string_view_dangling.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
