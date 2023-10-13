@@ -3,8 +3,8 @@
 #include <string_view>
 
 int main() {
-  std::string s = "Hellooooooooooooooo ";
-  std::string_view sv = s + "World\n";
-  std::cout << sv;
-  return 0;
+    std::string s = "Hellooooooooooooooo ";
+    std::string_view sv = s + "World\n";
+    std::cout << sv;
+    return 0;
 }
