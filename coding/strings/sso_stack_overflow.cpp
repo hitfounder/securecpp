@@ -3,7 +3,7 @@
 #include <iterator>
 #include <algorithm>
 
-int main() {
+void foo() {
     // Only 14 symbols, so string is allocated on stack
     std::string str{"11111111111111"};
 
@@ -17,5 +17,9 @@ int main() {
     std::copy(std::istream_iterator<char>(std::cin),
               std::istream_iterator<char>(),
               std::inserter(str, begin));
+}
+
+int main() {
+    foo();
     return 0;
 }
