@@ -18,6 +18,8 @@ add_executable(string_view_dangling strings/string_view_dangling.cpp)
 add_executable(string_view_null_termination strings/string_view_null_termination.cpp)
 add_executable(sso_stack_overflow strings/sso_stack_overflow.cpp)
 
+add_executable(uaf_temporary memory/uaf_temporary.cpp)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
