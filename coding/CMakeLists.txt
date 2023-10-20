@@ -19,6 +19,9 @@ add_executable(string_view_null_termination strings/string_view_null_termination
 add_executable(sso_stack_overflow strings/sso_stack_overflow.cpp)
 
 add_executable(uaf_temporary memory/uaf_temporary.cpp)
+add_executable(delete memory/delete.cpp)
+add_executable(placement_new memory/placement_new.cpp)
+add_executable(aligned_buffer memory/aligned_buffer.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
