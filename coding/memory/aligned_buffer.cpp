@@ -5,18 +5,12 @@ struct A {
 };
 
 int main() {
-    char i{0};  // This shifts stack alignment
-    (void)i;  // Just to suppress unused variable warning
+    alignas(A) char alignedSpace[sizeof(A) + 1];
 
-    char nonAlignedSpace[sizeof(A)];
-    alignas(A) char alignedSpace[sizeof(A)];
-
-    std::cout << "Non align address: " << static_cast<void*>(nonAlignedSpace) << std::endl;
+    A *a = new (&alignedSpace[1]) A;
     std::cout << "Aligned address: " << static_cast<void*>(alignedSpace) << std::endl;
-
-    A *a = new (&nonAlignedSpace) A;
     std::cout << "Object address: " << a << std::endl;
-    std::cout << a->a << std::endl;
+    std::cout << "Data: " << a->a << std::endl;
     // ..
     a->~A();
     return 0;
