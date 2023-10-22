@@ -23,6 +23,8 @@ add_executable(delete memory/delete.cpp)
 add_executable(placement_new memory/placement_new.cpp)
 add_executable(aligned_buffer memory/aligned_buffer.cpp)
 
+add_executable(double_delete memory/double_delete.cpp)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
