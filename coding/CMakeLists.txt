@@ -5,7 +5,7 @@ include(CTest)
 enable_testing()
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -Wextra -Wpedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -Wall -Wextra -Wpedantic")
 
 add_executable(null_pointer_init strings/null_pointer_init.cpp)
 add_executable(null_pointer_init_fix strings/null_pointer_init_fix.cpp)
@@ -22,9 +22,9 @@ add_executable(uaf_temporary memory/uaf_temporary.cpp)
 add_executable(delete memory/delete.cpp)
 add_executable(placement_new memory/placement_new.cpp)
 add_executable(aligned_buffer memory/aligned_buffer.cpp)
-
 add_executable(double_delete memory/double_delete.cpp)
 add_executable(smart_ptr_array memory/smart_ptr_array.cpp)
+add_executable(smart_ptr_dangling memory/smart_ptr_dangling.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
