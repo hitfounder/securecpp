@@ -25,6 +25,7 @@ add_executable(aligned_buffer memory/aligned_buffer.cpp)
 add_executable(double_delete memory/double_delete.cpp)
 add_executable(smart_ptr_array memory/smart_ptr_array.cpp)
 add_executable(smart_ptr_dangling memory/smart_ptr_dangling.cpp)
+add_executable(alloca memory/alloca.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
