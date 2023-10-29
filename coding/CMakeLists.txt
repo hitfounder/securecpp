@@ -27,6 +27,8 @@ add_executable(smart_ptr_array memory/smart_ptr_array.cpp)
 add_executable(smart_ptr_dangling memory/smart_ptr_dangling.cpp)
 add_executable(alloca memory/alloca.cpp)
 
+add_executable(init initialization/init.cpp)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
