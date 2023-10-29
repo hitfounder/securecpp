@@ -9,8 +9,6 @@ void funcAlloca(std::size_t size) {
 }
 
 void funcVLA(std::size_t size) {
-    std::array<int, size> vals;
-    (void) vals;
     {
         char buff[size];
         std::cout << static_cast<void*>(buff) << std::endl;
