@@ -4,8 +4,15 @@
 #pragma GCC diagnostic ignored "-Wuninitialized"
 #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
+#pragma GCC diagnostic ignored "-Wpointer-bool-conversion"
 
 struct Bar {
+    int i;
+    int j;
+};
+
+struct UnsafeBar {
+    UnsafeBar() {}
     int i;
     int j;
 };
@@ -27,7 +34,7 @@ void fooDefaultInitization() {
     char buff[10];
     Bar bar;
 
-    // Undefined behavior
+    // UB
     // 917094401 ? 21847
     std::cout << i << " " << buff << " " << bar.i << std::endl;
 
@@ -44,10 +51,21 @@ void fooValueInitization() {
     char buff[10]{};
     Bar bar = Bar();
     char *buffDyn = new char[10]();
+    UnsafeBar unsafeBar{};
 
     // 0  0
     std::cout << i << " " << buff << " "<< bar.i << " " << buffDyn << std::endl;
+    // UB
+    // 1031968064 32686
+    std::cout << unsafeBar.i << " " << unsafeBar.j << std::endl;
     delete [] buffDyn;
+}
+
+void fooVexingParse() {
+    int i();
+
+    // 1 - address of function will be implicitly converted to bool
+    std::cout << i << std::endl;
 }
 
 void fooDirectInitization() {
@@ -106,6 +124,9 @@ int main() {
 
     std::cout << "Value initization" << std::endl;
     fooValueInitization();
+
+    std::cout << "Vexing parse" << std::endl;
+    fooVexingParse();
 
     std::cout << "Direct initization" << std::endl;
     fooDirectInitization();
