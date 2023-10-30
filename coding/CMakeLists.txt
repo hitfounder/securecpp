@@ -28,6 +28,7 @@ add_executable(smart_ptr_dangling memory/smart_ptr_dangling.cpp)
 add_executable(alloca memory/alloca.cpp)
 
 add_executable(init initialization/init.cpp)
+add_executable(global_ub initialization/global_ub2.cpp initialization/global_ub1.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
