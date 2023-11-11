@@ -118,6 +118,24 @@ void fooUniversalInitialization() {
     std::cout << s1 << " " << s2 << std::endl;
 }
 
+void fooAutoInitialization() {
+    auto i = 10;
+    auto ui = 100u;
+    auto s = std::string{"string"};
+
+    auto print = [](auto val) {
+        std::cout << val << " " << typeid(val).name() << std::endl;
+    };
+
+    print(i);
+    print(ui);
+    print(s);
+
+    auto oops = {1000};
+    // initializer_list
+    std::cout << typeid(oops).name() << std::endl;
+}
+
 int main() {
     std::cout << "Default initization" << std::endl;
     fooDefaultInitization();
@@ -142,5 +160,8 @@ int main() {
 
     std::cout << "Universal initialization" << std::endl;
     fooUniversalInitialization();
+
+    std::cout << "Auto initialization" << std::endl;
+    fooAutoInitialization();
     return 0;
 }
