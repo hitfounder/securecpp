@@ -7,6 +7,9 @@ enable_testing()
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -Wall -Wextra -Wpedantic")
 
+find_package(Microsoft.GSL CONFIG REQUIRED)
+find_package(Boost REQUIRED)
+
 add_executable(null_pointer_init strings/null_pointer_init.cpp)
 add_executable(null_pointer_init_fix strings/null_pointer_init_fix.cpp)
 add_executable(iterator_invalidated_insert strings/iterator_invalidated_insert.cpp)
@@ -32,6 +35,7 @@ add_executable(global_ub initialization/global_ub2.cpp initialization/global_ub1
 add_executable(narrowing initialization/narrowing.cpp initialization/narrowing.cpp)
 
 add_executable(unsigned arithmetics/unsigned.cpp)
+add_executable(sizeof arithmetics/sizeof.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
