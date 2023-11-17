@@ -7,7 +7,15 @@ enable_testing()
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -Wall -Wextra -Wpedantic")
 
-find_package(Microsoft.GSL CONFIG REQUIRED)
+include(FetchContent)
+FetchContent_Declare(GSL
+    GIT_REPOSITORY "https://github.com/microsoft/GSL"
+    GIT_TAG "v4.0.0"
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(GSL)
+link_libraries(Microsoft.GSL::GSL)
+
 find_package(Boost REQUIRED)
 
 add_executable(null_pointer_init strings/null_pointer_init.cpp)
