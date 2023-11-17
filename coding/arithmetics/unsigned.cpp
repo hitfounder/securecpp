@@ -4,9 +4,13 @@
 void wrapping() {
     constexpr unsigned int uiMax = std::numeric_limits<unsigned int>::max();
     constexpr unsigned int uiMin = std::numeric_limits<unsigned int>::min();
+    // unsigned int max: 4294967295 unsigned int min: 0
     std::cout << "unsigned int max: " << uiMax << " unsigned int min: " << uiMin << std::endl;
+    // Addition wrapping: 0
     std::cout << "Addition wrapping: " << uiMax + 1 << std::endl;
+    // Substraction wrapping: 4294967295
     std::cout << "Substraction wrapping: " << uiMin - 1 << std::endl;
+    // Multiplication wrapping: 4294967294
     std::cout << "Multiplication wrapping: " << uiMax * 2 << std::endl;
 }
 
