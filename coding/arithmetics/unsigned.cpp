@@ -1,3 +1,4 @@
+#include <gtest/gtest.h>
 #include <iostream>
 #include <limits>
 
@@ -14,51 +15,73 @@ void wrapping() {
     std::cout << "Multiplication wrapping: " << uiMax * 2 << std::endl;
 }
 
-void wrappingAdditionPrecondition(unsigned int a, unsigned int b) {
+unsigned int wrappingAdditionPrecondition(unsigned int a, unsigned int b) {
     if (std::numeric_limits<unsigned int>::max() - a < b) {
         throw std::runtime_error("Wrapping");
     }
-    // unsigned int summ = a + b;
+    return a + b;
 }
 
-void wrappingAdditionPostcondition(unsigned int a, unsigned int b) {
-    unsigned int summ = a + b;
+unsigned int wrappingAdditionPostcondition(unsigned int a, unsigned int b) {
+    const unsigned int summ = a + b;
     if (summ < a) {
         throw std::runtime_error("Wrapping");
     }
+    return summ;
 }
 
-void wrappingSubstractingPrecondition(unsigned int a, unsigned int b) {
+unsigned int wrappingSubstractingPrecondition(unsigned int a, unsigned int b) {
     if (a < b) {
         throw std::runtime_error("Wrapping");
     }
-    // unsigned int diff = a - b;
+    return a - b;
 }
 
-void wrappingSubstractingPostcondition(unsigned int a, unsigned int b) {
-    unsigned int diff = a - b;
+unsigned int wrappingSubstractingPostcondition(unsigned int a, unsigned int b) {
+    const unsigned int diff = a - b;
     if (diff > a) {
         throw std::runtime_error("Wrapping");
     }
+    return diff;
 }
 
-void wrappingMultiplicatingPrecondition(unsigned int a, unsigned int b) {
-    if (a > std::numeric_limits<unsigned int>::max()/b) {
+unsigned int wrappingMultiplicatingPrecondition(unsigned int a, unsigned int b) {
+    if (a > std::numeric_limits<unsigned int>::max() / b) {
         throw std::runtime_error("Wrapping");
     }
-    // unsigned int prod = a * b;
+    return a * b;
 }
 
-void wrappingMultiplicatingPostcondition(unsigned int a, unsigned int b) {
+unsigned int wrappingMultiplicatingPostcondition(unsigned int a, unsigned int b) {
     static_assert(sizeof(unsigned long long) >= 2 * sizeof(unsigned int));
-    unsigned long long prod =
+    const unsigned long long prod =
         static_cast<unsigned long long>(a) * static_cast<unsigned long long>(b);
     if (prod > std::numeric_limits<unsigned int>::max()) {
         throw std::runtime_error("Wrapping");
     }
+    return static_cast<unsigned int>(prod);
 }
 
 int main () {
     wrapping();
+
+    EXPECT_EQ(wrappingAdditionPrecondition(1, 2), 3);
+    EXPECT_EQ(wrappingAdditionPostcondition(1, 2), 3);
+    EXPECT_THROW(wrappingAdditionPrecondition(std::numeric_limits<unsigned int>::max(), 1), std::runtime_error);
+    EXPECT_THROW(wrappingAdditionPrecondition(1, std::numeric_limits<unsigned int>::max()), std::runtime_error);
+    EXPECT_THROW(wrappingAdditionPostcondition(std::numeric_limits<unsigned int>::max(), 1), std::runtime_error);
+    EXPECT_THROW(wrappingAdditionPostcondition(1, std::numeric_limits<unsigned int>::max()), std::runtime_error);
+
+    EXPECT_EQ(wrappingSubstractingPrecondition(2, 1), 1);
+    EXPECT_EQ(wrappingSubstractingPostcondition(2, 1), 1);
+    EXPECT_THROW(wrappingSubstractingPrecondition(1, 2), std::runtime_error);
+    EXPECT_THROW(wrappingSubstractingPostcondition(1, 2), std::runtime_error);
+
+    EXPECT_EQ(wrappingMultiplicatingPrecondition(2, 2), 4);
+    EXPECT_EQ(wrappingMultiplicatingPostcondition(2, 2), 4);
+    EXPECT_THROW(wrappingSubstractingPrecondition(std::numeric_limits<unsigned int>::max(), 2), std::runtime_error);
+    EXPECT_THROW(wrappingSubstractingPrecondition(2, std::numeric_limits<unsigned int>::max()), std::runtime_error);
+    EXPECT_THROW(wrappingSubstractingPostcondition(std::numeric_limits<unsigned int>::max(), 2), std::runtime_error);
+    EXPECT_THROW(wrappingSubstractingPostcondition(2, std::numeric_limits<unsigned int>::max()), std::runtime_error);
     return 0;
 }

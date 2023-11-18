@@ -17,6 +17,7 @@ FetchContent_MakeAvailable(GSL)
 link_libraries(Microsoft.GSL::GSL)
 
 find_package(Boost REQUIRED)
+find_package(GTest REQUIRED)
 
 add_executable(null_pointer_init strings/null_pointer_init.cpp)
 add_executable(null_pointer_init_fix strings/null_pointer_init_fix.cpp)
@@ -43,6 +44,9 @@ add_executable(global_ub initialization/global_ub2.cpp initialization/global_ub1
 add_executable(narrowing initialization/narrowing.cpp initialization/narrowing.cpp)
 
 add_executable(unsigned arithmetics/unsigned.cpp)
+target_link_libraries(unsigned GTest::gtest_main)
+add_executable(signed arithmetics/signed.cpp)
+target_link_libraries(signed GTest::gtest_main)
 add_executable(sizeof arithmetics/sizeof.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
