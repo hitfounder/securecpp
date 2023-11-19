@@ -34,6 +34,50 @@ int overflowSubstraction(int a, int b) {
     return a - b;
 }
 
+int overflowMultiplicationPrecondition(int a, int b) {
+    if (a > 0) {
+        if (b > 0) {
+            if (a > (std::numeric_limits<int>::max() / b)) {
+               throw std::runtime_error("Overflow");
+            }
+        } else {
+            if (b < (std::numeric_limits<int>::min() / a)) {
+                throw std::runtime_error("Overflow");
+            }
+        }
+    } else {
+        if (b > 0) {
+            if (a < (std::numeric_limits<int>::min() / b)) {
+                throw std::runtime_error("Overflow");
+            }
+        } else {
+            if ((a != 0) && (b < (std::numeric_limits<int>::max() / a))) {
+                throw std::runtime_error("Overflow");
+            }
+        }
+    }
+    return a * b;
+}
+
+int overflowMultiplicationPostcondition(int a, int b) {
+    static_assert(sizeof(long long) >= 2 * sizeof(int));
+
+    const long long prod =
+        static_cast<long long>(a) * static_cast<long long>(b);
+    if (prod > std::numeric_limits<int>::max() ||
+        prod < std::numeric_limits<int>::min()) {
+        throw std::runtime_error("Overflow");
+    }
+    return static_cast<int>(prod);
+}
+
+int overflowDivision(int a, int b) {
+    if (b == 0 || (a == std::numeric_limits<int>::min() && b == -1)) {
+        throw std::runtime_error("Overflow");
+    }
+    return a / b;
+}
+
 int main () {
     overflow();
 
@@ -48,5 +92,22 @@ int main () {
     EXPECT_THROW(overflowSubstraction(std::numeric_limits<int>::min(), 1), std::runtime_error);
     EXPECT_THROW(overflowSubstraction(std::numeric_limits<int>::max(), -1), std::runtime_error);
 
+    EXPECT_EQ(overflowMultiplicationPrecondition(2, 2), 4);
+    // a > 0, b > 0
+    EXPECT_THROW(overflowMultiplicationPrecondition(std::numeric_limits<int>::max(), 2), std::runtime_error);
+    // a > 0, b < 0
+    EXPECT_THROW(overflowMultiplicationPrecondition(std::numeric_limits<int>::max(), -2), std::runtime_error);
+    // a < 0, b > 0
+    EXPECT_THROW(overflowMultiplicationPrecondition(-std::numeric_limits<int>::max(), 2), std::runtime_error);
+    // a < 0, b < 0
+    EXPECT_THROW(overflowMultiplicationPrecondition(-std::numeric_limits<int>::max(), -2), std::runtime_error);
+
+    EXPECT_EQ(overflowMultiplicationPostcondition(2, 2), 4);
+    EXPECT_THROW(overflowMultiplicationPostcondition(std::numeric_limits<int>::max(), 2), std::runtime_error);
+    EXPECT_THROW(overflowMultiplicationPostcondition(2, std::numeric_limits<int>::max()), std::runtime_error);
+
+    EXPECT_EQ(overflowDivision(2, 2), 1);
+    EXPECT_THROW(overflowDivision(std::numeric_limits<int>::min(), -1), std::runtime_error);
+    EXPECT_THROW(overflowDivision(std::numeric_limits<int>::min(), 0), std::runtime_error);
     return 0;
 }
