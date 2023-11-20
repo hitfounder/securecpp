@@ -5,7 +5,7 @@ include(CTest)
 enable_testing()
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -Wall -Wextra -Wpedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2b -Wall -Wextra -Wpedantic")
 
 include(FetchContent)
 FetchContent_Declare(GSL
