@@ -78,6 +78,13 @@ int overflowDivision(int a, int b) {
     return a / b;
 }
 
+int overflowUnaryMinus(int a) {
+    if (a == std::numeric_limits<int>::min()) {
+        throw std::runtime_error("Overflow");
+    }
+    return -a;
+}
+
 int main () {
     overflow();
 
@@ -109,5 +116,8 @@ int main () {
     EXPECT_EQ(overflowDivision(2, 2), 1);
     EXPECT_THROW(overflowDivision(std::numeric_limits<int>::min(), -1), std::runtime_error);
     EXPECT_THROW(overflowDivision(std::numeric_limits<int>::min(), 0), std::runtime_error);
+
+    EXPECT_EQ(overflowUnaryMinus(2), -2);
+    EXPECT_THROW(overflowUnaryMinus(std::numeric_limits<int>::min()), std::runtime_error);
     return 0;
 }
