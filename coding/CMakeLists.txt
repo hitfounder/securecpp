@@ -50,6 +50,7 @@ target_link_libraries(signed GTest::gtest_main)
 add_executable(sizeof arithmetics/sizeof.cpp)
 add_executable(bitshift arithmetics/bitshift.cpp)
 target_link_libraries(bitshift GTest::gtest_main)
+add_executable(type_conversion arithmetics/type_conversion.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
