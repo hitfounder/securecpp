@@ -5,7 +5,7 @@ include(CTest)
 enable_testing()
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2b -Wall -Wextra -Wpedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -Wall -Wextra -Wpedantic")
 
 include(FetchContent)
 FetchContent_Declare(GSL
@@ -51,6 +51,8 @@ add_executable(sizeof arithmetics/sizeof.cpp)
 add_executable(bitshift arithmetics/bitshift.cpp)
 target_link_libraries(bitshift GTest::gtest_main)
 add_executable(type_conversion arithmetics/type_conversion.cpp)
+add_executable(floats arithmetics/floats.cpp)
+target_link_libraries(floats GTest::gtest_main)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
