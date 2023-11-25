@@ -1,5 +1,6 @@
 #include <boost/type_index.hpp>
 #include <iostream>
+#include <limits>
 
 void IntPromotionInt() {
     constexpr unsigned char a{std::numeric_limits<unsigned char>::max()};
