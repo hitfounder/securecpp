@@ -7,6 +7,21 @@
 
 #pragma STDC FENV_ACCESS ON
 
+template <typename T>
+void CoutDigits() {
+    std::cout << boost::typeindex::type_id<T>().pretty_name() 
+        << ", digits: " << std::numeric_limits<T>::digits10 
+        << ", max_digits: " << std::numeric_limits<T>::max_digits10
+        << ", size bytes: " << sizeof(T)
+        << std::endl; 
+}
+
+void GetDigits() {
+    CoutDigits<float>();
+    CoutDigits<double>();
+    CoutDigits<long double>();
+}
+
 template<typename T>
 T NanInfWrapper(std::function<T ()> op) {
     const auto res{op()};
@@ -64,6 +79,8 @@ int main() {
     static_assert(std::numeric_limits<float>::is_iec559);
     static_assert(std::numeric_limits<double>::is_iec559);
     static_assert(std::numeric_limits<long double>::is_iec559);
+
+    GetDigits();
 
     // Domain error
     EXPECT_THROW(NanInfWrapper<double>([](){return std::sqrt(-1.0);}), std::runtime_error);
