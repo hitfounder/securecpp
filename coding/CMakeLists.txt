@@ -56,6 +56,7 @@ target_link_libraries(floats GTest::gtest_main)
 
 add_executable(terminate threading/terminate.cpp)
 add_executable(shared_ptr threading/shared_ptr.cpp)
+add_executable(stack_race_condition threading/stack_race_condition.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
