@@ -60,7 +60,7 @@ void unhandledExceptionFixed() {
 int main() {
     std::set_terminate([]()
     {
-        std::cout << "Termination" << std::endl;
+        std::cout << "Termination. Could be malicious code here." << std::endl;
     });
 
     //termination();
