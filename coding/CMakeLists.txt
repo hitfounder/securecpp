@@ -61,6 +61,9 @@ add_executable(multiple_locks threading/multiple_locks.cpp)
 add_executable(recursive_lock threading/recursive_lock.cpp)
 add_executable(endless_wait threading/endless_wait.cpp)
 
+add_executable(paths files/paths.cpp)
+target_link_libraries(paths GTest::gtest_main)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
