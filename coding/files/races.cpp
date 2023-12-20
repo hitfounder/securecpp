@@ -25,6 +25,12 @@ void CheckAndCreateNoRace(const std::filesystem::path& p) {
 #endif
 }
 
+void CheckAndUse(const std::filesystem::path& p) {
+    if (!std::filesystem::is_symlink(p)) {
+        std::fstream f(p.string(), std::ios_base::in | std::ios_base::out);
+    }
+}
+
 int main() {
     CheckAndCreate("/tmp/file");
     std::filesystem::remove("/tmp/file");
