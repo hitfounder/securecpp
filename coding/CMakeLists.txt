@@ -63,6 +63,7 @@ add_executable(endless_wait threading/endless_wait.cpp)
 
 add_executable(paths files/paths.cpp)
 target_link_libraries(paths GTest::gtest_main)
+add_executable(races files/races.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
