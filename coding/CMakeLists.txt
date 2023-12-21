@@ -14,6 +14,12 @@ FetchContent_Declare(GSL
     GIT_SHALLOW ON
 )
 FetchContent_MakeAvailable(GSL)
+FetchContent_Declare(llfio
+    GIT_REPOSITORY "https://github.com/ned14/llfio"
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(llfio)
+
 link_libraries(Microsoft.GSL::GSL)
 
 find_package(Boost REQUIRED)
@@ -64,6 +70,7 @@ add_executable(endless_wait threading/endless_wait.cpp)
 add_executable(paths files/paths.cpp)
 target_link_libraries(paths GTest::gtest_main)
 add_executable(races files/races.cpp)
+target_link_libraries(races llfio_sl)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
