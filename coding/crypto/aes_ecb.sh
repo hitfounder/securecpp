@@ -1,6 +1,6 @@
 #!/bin/bash
 
-key=$(<data/key.txt)
+key=$(<data/key256.txt)
 echo "Key: $key"
 echo "Data to encrypt: `cat data/in`"
 openssl enc -aes-256-ecb -in data/in -K "$key" -out data/out -v

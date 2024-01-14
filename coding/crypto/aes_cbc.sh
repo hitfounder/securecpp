@@ -1,7 +1,7 @@
 #!/bin/bash
 
-key=$(<data/key.txt)
-iv=$(<data/iv.txt)
+key=$(<data/key256.txt)
+iv=$(<data/iv128.txt)
 echo "Key: $key"
 echo "IV: $iv"
 echo "Data to encrypt: `cat data/in`"
