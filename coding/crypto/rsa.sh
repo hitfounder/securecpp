@@ -8,7 +8,7 @@ encryptedData=data/out
 decrtptedData=data/dec
 
 # Generate private key
-openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537 -out $privKey -outform PEM -quiet
+openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537 -out $privKey -outform PEM
 echo "Generated private key:"
 (head -n 4; echo "..."; tail -n 4) < $privKey
 
@@ -22,9 +22,9 @@ echo "Generated public key:"
 echo
 
 # Encrypting data using public key
-openssl pkeyutl -encrypt -in $inputData -inkey $pubKey -pubin -out $encryptedData
+openssl pkeyutl -encrypt -in $inputData -inkey $pubKey -pubin -out $encryptedData -pkeyopt rsa_padding_mode:oaep
 echo "Encrypted: `xxd -ps -u $encryptedData`"
 
 # Decrypting data using private key
-openssl pkeyutl -decrypt -in $encryptedData -inkey $privKey -out $decrtptedData
+openssl pkeyutl -decrypt -in $encryptedData -inkey $privKey -out $decrtptedData -pkeyopt rsa_padding_mode:oaep
 echo "Decrypted: `cat $decrtptedData`"
