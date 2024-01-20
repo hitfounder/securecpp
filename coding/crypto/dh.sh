@@ -54,3 +54,4 @@ openssl pkeyutl -derive -inkey $privKey2 -peerkey $pubKey1 -out $sharedSecret2
 
 # Secrets will be the same
 cmp $sharedSecret1 $sharedSecret2
+echo "Shared secret: `xxd -ps -u $sharedSecret1`"
