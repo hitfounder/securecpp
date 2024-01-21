@@ -11,6 +11,7 @@ decrtptedData=data/dec
 openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537 -out $privKey -outform PEM
 echo "Generated private key:"
 (head -n 4; echo "..."; tail -n 4) < $privKey
+openssl pkey -text -in $privKey
 
 echo
 
@@ -18,6 +19,7 @@ echo
 openssl rsa -in $privKey -pubout -out $pubKey
 echo "Generated public key:"
 (head -n 4; echo "..."; tail -n 4) < $pubKey
+openssl pkey -text -pubin -in $pubKey
 
 echo
 
