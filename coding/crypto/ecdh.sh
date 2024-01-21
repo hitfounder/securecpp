@@ -13,6 +13,7 @@ generate_private_key() {
     openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256 -pkeyopt ec_param_enc:named_curve -out $1 -outform PEM
     echo "Generated private key:"
     cat $1
+    openssl pkey -text -in $1
 }
 
 generate_public_key() {
