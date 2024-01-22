@@ -8,7 +8,7 @@ encryptedData=data/out
 decrtptedData=data/dec
 
 # Generate private key
-openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537 -out $privKey -outform PEM
+openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537 -pkeyopt rsa_keygen_primes:2 -out $privKey -outform PEM
 echo "Generated private key:"
 (head -n 4; echo "..."; tail -n 4) < $privKey
 openssl pkey -text -in $privKey
