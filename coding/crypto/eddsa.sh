@@ -20,19 +20,16 @@ echo "Generated public key:"
 (head -n 4; echo "..."; tail -n 4) < $pubKey
 openssl pkey -text -pubin -in $pubKey
 
-# Calculate hash
-openssl dgst -sha256 -binary -out $hash $inputData
-echo "Hash of input file is: `xxd -ps -u $hash`"
-
 # Sign
+# Eddsa always uses sha512,
+# so we could not pass external digest.
+# "rawin" is necessary
 openssl pkeyutl -sign \
-  -in $hash -inkey $privKey \
-  -out $signature \
-  -pkeyopt digest:sha256
+  -rawin -in $inputData -inkey $privKey \
+  -out $signature
 echo "Signature is: `xxd -ps -u $signature`"
 
 # Verify
 openssl pkeyutl -verify \
-  -in $hash -sigfile $signature \
-  -pubin -inkey $pubKey \
-  -pkeyopt digest:sha256
+  -rawin -in $inputData -sigfile $signature \
+  -pubin -inkey $pubKey
