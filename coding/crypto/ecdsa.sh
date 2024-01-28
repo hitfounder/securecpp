@@ -1,7 +1,7 @@
 #!/bin/bash
 
-privKey=data/ecdsa_pss_priv.pem
-pubKey=data/ecdsa_pss_pub.pem
+privKey=data/ecdsa_priv.pem
+pubKey=data/ecdsa_pub.pem
 
 inputData=data/in
 hash=data/hash
