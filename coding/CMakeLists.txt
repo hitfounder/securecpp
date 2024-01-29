@@ -73,6 +73,7 @@ add_executable(races files/races.cpp)
 target_link_libraries(races llfio_sl)
 
 add_executable(hash crypto/hash.cpp)
+add_executable(random crypto/random.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
