@@ -14,6 +14,8 @@ void Rand() {
 void Random() {
     std::uniform_int_distribution<int> distribution(0, RAND_MAX);
     std::random_device rd;
+    std::cout << "Entropy estimation: " << rd.entropy() << ", entropy min: " << rd.min() << ", entropy max: "<< rd.max() << std::endl;
+
     std::mt19937 engine(rd());
 
     std::cout << "mt19937 values on [0, " << RAND_MAX << "]: " << std::endl;
