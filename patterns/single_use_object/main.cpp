@@ -1,30 +1,8 @@
-#define __STDC_WANT_LIB_EXT1__ 1
+#include "memzero.h"
 
 #include <iostream>
 #include <optional>
 #include <string>
-#include <string.h>
-
-void memzero(void *const buff, const size_t len)
-{
-#ifdef _WIN32
-    SecureZeroMemory(buff, len);
-#elif defined(__STDC_LIB_EXT1__)
-    if (len && memset_s(buff, static_cast<rsize_t>(len), 0, static_cast<rsize_t>(len)) != 0) {
-        throw std::runtime_error("Memset error");
-    }
-#elif defined(__linux__ ) || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)
-    explicit_bzero(buff, len);
-#else
-    volatile unsigned char *volatile buff_ =
-        static_cast<volatile unsigned char *volatile>(buff);
-    size_t i{0};
-
-    while (i < len) {
-        buff_[i++] = 0U;
-    }
-#endif
-}
 
 using SecureData = std::string;
 
