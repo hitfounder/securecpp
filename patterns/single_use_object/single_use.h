@@ -1,7 +1,5 @@
 #pragma once
 
-#include "secure_data.h"
-
 #include <optional>
 
 template <typename T>
@@ -16,7 +14,7 @@ public:
     SingleUse(SingleUse&&) = default;
     SingleUse& operator=(SingleUse&&) = default;
 
-    SecureData extract() {
+    T extract() {
         if (m_data.has_value()) {
             OptionalData data;
             std::swap(m_data, data);
