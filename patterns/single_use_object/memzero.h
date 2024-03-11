@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string.h>
 
 #if defined(__STDC_LIB_EXT1__)
@@ -26,7 +28,7 @@
     #define HAS_EXPLICIT_MEMSET 1
 #endif
 
-void memzero(void *const buff, const size_t len)
+inline void memzero(void *const buff, const size_t len)
 {
 #if defined (HAS_SECURE_ZERO_MEMORY)
     ::SecureZeroMemory(buff, len);

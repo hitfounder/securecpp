@@ -1,45 +1,19 @@
-#include "memzero.h"
+#include "secure_data.h"
+#include "single_use.h"
 
 #include <iostream>
-#include <optional>
-#include <string>
-
-using SecureData = std::string;
-
-class SingleUse {
-public:
-    explicit SingleUse(const SecureData& secureData)
-        : m_secureData(secureData) {}
-
-    SingleUse(const SingleUse&) = delete;
-    SingleUse& operator=(const SingleUse&) = delete;
-
-    SingleUse(SingleUse&&) = default;
-    SingleUse& operator=(SingleUse&&) = default;
-
-    SecureData extract() {
-        if (m_secureData.has_value()) {
-            OptionalSecureData secureData;
-            std::swap(m_secureData, secureData);
-            return secureData.value();
-        }
-        throw std::runtime_error("Value already used");
-    }
-    
-private:
-    using OptionalSecureData = std::optional<SecureData>;
-
-    mutable OptionalSecureData m_secureData;
-};
+#include <iterator>
 
 SecureData RequestPassword() {
     // Password is requested here
-    return "password";
+    return {'p', 'a', 's', 's', 'w', 'o', 'r', 'd'};
 }
 
 void Authenticate(const SecureData& password) {
     // Authentication is performed here
-    std::cout << "Authentication with password: " << password << std::endl;
+    std::cout << "Authenticating with password: ";
+    std::copy(password.begin(), password.end(), std::ostream_iterator<char>(std::cout, ""));
+    std::cout << std::endl;
 }
 
 int main(int, char**){
