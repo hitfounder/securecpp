@@ -11,30 +11,40 @@ struct AuthUserBad {
     std::string m_password;
 };
 
-struct UserName {
+class UserName {
+public:
     explicit UserName(const std::string& value)
         : m_value(validate(value)) {}
 
-    std::string m_value;
+    std::string get() const {
+        return m_value;
+    }
 
 private:
-    std::string validate(const std::string& value) const {
+    const std::string& validate(const std::string& value) const {
         // Domain rules are checked here
         return value;
     };
+
+    const std::string m_value;
 };
 
-struct Password {
+class Password {
+public:
     explicit Password(const SecureData& value)
         : m_value(validate(value)) {}
 
-    SingleUse<SecureData> m_value;
+    SecureData get() const {
+        return m_value.extract();
+    }
 
 private:
-    SecureData validate(const SecureData& value) const {
+    const SecureData& validate(const SecureData& value) const {
         // Domain rules are checked here
         return value;
     };
+
+    mutable SingleUse<SecureData> m_value;
 };
 
 struct AuthUser {
@@ -46,5 +56,8 @@ struct AuthUser {
 };
 
 int main(int, char**) {
+    UserName userName{"user"};
+    Password password({'p', 'a', 's', 's', 'w', 'o', 'r', 'd'});
+    AuthUser(std::move(userName), std::move(password));
     return 0;
 }
