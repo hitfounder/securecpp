@@ -1,8 +1,11 @@
-#include "secure_data.h"
-#include "single_use.h"
-
 #include <iostream>
 #include <iterator>
+
+#include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
+
+#include "secure_data.h"
+#include "single_use.h"
 
 SecureData RequestPassword() {
     // Password is requested here
@@ -11,9 +14,7 @@ SecureData RequestPassword() {
 
 void Authenticate(const SecureData& password) {
     // Authentication is performed here
-    std::cout << "Authenticating with password: ";
-    std::copy(password.begin(), password.end(), std::ostream_iterator<char>(std::cout, ""));
-    std::cout << std::endl;
+    spdlog::info("Authenticating with password: {}", password);
 }
 
 int main(int, char**){

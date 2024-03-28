@@ -42,3 +42,9 @@ inline bool operator!=(const SecureAllocator<T> &a, const SecureAllocator<U> &b)
 }
 
 using SecureData = std::vector<char, SecureAllocator<char>>;
+
+std::ostream& operator<< (std::ostream& stream, const SecureData&)
+{
+    stream << "*****";
+    return stream;
+}
