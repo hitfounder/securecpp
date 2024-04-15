@@ -13,11 +13,11 @@ public:
             absl::CEscape(std::string_view(msg.payload.data(), msg.payload.size()))
         };
         absl::StrReplaceAll({
-            {"&", "&amp;"},
-            {"<", "&lt;"},
-            {">", "&gt;"},
+            {"&",  "&amp;"},
+            {"<",  "&lt;"},
+            {">",  "&gt;"},
             {"\"", "&quot;"},
-            {"'", "&#39;"}}, &sanitized);
+            {"'",  "&apos;"}}, &sanitized);
         dest.append(sanitized.data(), sanitized.data() + sanitized.size());
     }
 
