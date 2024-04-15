@@ -14,11 +14,20 @@ FetchContent_Declare(spdlog
     GIT_SHALLOW ON
 )
 FetchContent_MakeAvailable(spdlog)
+FetchContent_Declare(abseil
+    GIT_REPOSITORY "https://github.com/abseil/abseil-cpp.git"
+    GIT_TAG "lts_2024_01_16"
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(abseil)
 
 add_executable(single_use_object single_use_object/main.cpp)
 target_link_libraries(single_use_object PRIVATE spdlog::spdlog_header_only)
 
 add_executable(value_object value_object/main.cpp)
+
+add_executable(secure_logging secure_logging/main.cpp)
+target_link_libraries(secure_logging PRIVATE spdlog::spdlog_header_only absl::strings)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
