@@ -27,10 +27,15 @@ public:
 };
 
 int main() {
-    const std::string vulnLog{"Test\n\r\t\013\014<script>alert(\"Hello, world!\");</script>"};
+    const std::string vulnLog{"Test\b\b\t\013\014<script>alert(\"Hello, world!\");</script>"};
 
-    spdlog::set_formatter(std::make_unique<spdlog::pattern_formatter>("[%c] [%^%l%$] %v"));
-    spdlog::info(vulnLog);
+    spdlog::set_formatter(std::make_unique<spdlog::pattern_formatter>("[%c] [%l] %v"));
+    // Fake entry
+    spdlog::info("Text\n[Mon Apr 15 18:22:59 2024] [info] Fake log entry");
+    // XSS atack
+    spdlog::info("<script>alert(\"Hello, world!\");</script>");
+    // Remove log entry
+    spdlog::info("Some usefull text \b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b                             ");
 
     auto formatter = std::make_unique<spdlog::pattern_formatter>();
     formatter->add_flag<sanitazing_log_formatter>('v').set_pattern("[%c] [%^%l%$] %v");
