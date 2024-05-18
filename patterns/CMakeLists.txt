@@ -29,6 +29,8 @@ add_executable(value_object value_object/main.cpp)
 add_executable(secure_logging secure_logging/main.cpp)
 target_link_libraries(secure_logging PRIVATE spdlog::spdlog_header_only absl::strings)
 
+add_executable(sandboxing sandboxing/main.cpp)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
