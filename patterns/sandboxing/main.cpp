@@ -42,7 +42,7 @@ public:
 
 private:
     void GoToSandox() {
-            struct sock_filter filter[] = {
+        struct sock_filter filter[] = {
             /* seccomp(2) says we should always check the arch */
             /* as syscalls may have different numbers on different architectures */
             /* see https://fedora.juszkiewicz.com.pl/syscalls.html */
