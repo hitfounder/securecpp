@@ -6,6 +6,7 @@ enable_testing()
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -Wall -Wextra -Wpedantic -pthread")
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(FetchContent)
 FetchContent_Declare(spdlog
@@ -30,6 +31,14 @@ add_executable(secure_logging secure_logging/main.cpp)
 target_link_libraries(secure_logging PRIVATE spdlog::spdlog_header_only absl::strings)
 
 add_executable(sandboxing sandboxing/main.cpp)
+
+add_executable(policy policy/main.cpp)
+include(CheckSeLinux)
+CheckSELinux()
+if (DEFINED SELINUX_FOUND)
+    target_link_libraries(policy PRIVATE selinux)
+    target_compile_definitions(policy PRIVATE WITH_SELINUX)
+endif()
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

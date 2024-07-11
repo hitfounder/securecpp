@@ -1,0 +1,40 @@
+
+## <summary>policy for policy</summary>
+
+########################################
+## <summary>
+##	Execute policy_exec_t in the policy domain.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`policy_domtrans',`
+	gen_require(`
+		type policy_t, policy_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, policy_exec_t, policy_t)
+')
+
+######################################
+## <summary>
+##	Execute policy in the caller domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`policy_exec',`
+	gen_require(`
+		type policy_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	can_exec($1, policy_exec_t)
+')

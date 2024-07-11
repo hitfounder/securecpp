@@ -1,0 +1,25 @@
+policy_module(policy, 1.0.0)
+
+########################################
+#
+# Declarations
+#
+
+type policy_t;
+type policy_exec_t;
+init_daemon_domain(policy_t, policy_exec_t)
+
+permissive policy_t;
+
+########################################
+#
+# policy local policy
+#
+allow policy_t self:fifo_file rw_fifo_file_perms;
+allow policy_t self:unix_stream_socket create_stream_socket_perms;
+
+domain_use_interactive_fds(policy_t)
+
+files_read_etc_files(policy_t)
+
+miscfiles_read_localization(policy_t)
