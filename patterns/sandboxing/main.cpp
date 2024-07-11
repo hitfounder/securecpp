@@ -1,6 +1,3 @@
-#include <functional>
-#include <iostream>
-
 #include <linux/audit.h>
 #include <linux/filter.h>
 #include <linux/seccomp.h>
@@ -10,6 +7,9 @@
 #include <sys/utsname.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
+#include <functional>
+#include <iostream>
 
 class SecurityDomain
 {
@@ -84,16 +84,15 @@ private:
 
 int main()
 {
-    SecurityDomain domain([]() {
-        std::cout << "Hello world" << std::endl;
-        struct utsname name;
-        if (uname(&name)) {
-            throw std::runtime_error("uname failed");
-        }
-    });
-
     try
     {
+        SecurityDomain domain([]() {
+            std::cout << "Hello world" << std::endl;
+            struct utsname name;
+            if (uname(&name)) {
+                throw std::runtime_error("uname failed");
+            }
+        });
         domain.Enter();
     }
     catch(const std::exception& e)
