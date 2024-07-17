@@ -8,6 +8,7 @@
 #include <sys/prctl.h>
 #include <sys/ptrace.h>
 #include <sys/syscall.h>
+#include <unistd.h>
 
 #include <stdexcept>
 
