@@ -48,7 +48,15 @@ if (UNIX)
 endif()
 
 if (WIN32)
-    add_executable(secure_storage secure_storage/main.cpp)
+    FetchContent_Declare(nlohmann
+        GIT_REPOSITORY "https://github.com/nlohmann/json.git"
+        GIT_TAG "v3.11.3"
+        GIT_SHALLOW ON
+    )
+    FetchContent_MakeAvailable(nlohmann)
+
+    add_executable(secure_storage secure_storage/main.cpp secure_storage/json_storage.cpp)
+    target_link_libraries(secure_storage PRIVATE absl::flags_parse nlohmann_json::nlohmann_json)
 endif()
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

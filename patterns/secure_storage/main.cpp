@@ -40,11 +40,19 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    if (operation == "read") {
-        std::cout << storage->Read(key) << std::endl;
-    } else if (operation == "write") {
-        storage->Write(key, value);
-        std::cout << "Secret has been written" << std::endl;
+    try
+    {
+        if (operation == "read") {
+            std::cout << "Got secret for a key '" << key << "': " << storage->Read(key) << std::endl;
+        } else if (operation == "write") {
+            storage->Write(key, value);
+            std::cout << "Secret for a key '"<< key << "' has been written" << std::endl;
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        return 1;
     }
     return 0;
 }
