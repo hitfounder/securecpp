@@ -47,6 +47,10 @@ if (UNIX)
     endif()
 endif()
 
+if (WIN32)
+    add_executable(secure_storage secure_storage/main.cpp)
+endif()
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
