@@ -1,5 +1,6 @@
 #include "json_storage.h"
 
+#include <absl/strings/escaping.h>
 #include <nlohmann/json.hpp>
 
 #include <filesystem>
@@ -32,14 +33,18 @@ void JsonStorage::ToJson() {
 }
 
 void JsonStorage::Write(const std::string& key, const std::string& value) {
-    m_data[key] = value;
+    m_data[absl::Base64Escape(key)] = absl::Base64Escape(value);
     ToJson();
 }
 
 std::string JsonStorage::Read(const std::string& key) const {
-    const auto found{m_data.find(key)};
+    const auto found{m_data.find(absl::Base64Escape(key))};
     if (found == std::end(m_data)) {
         throw std::runtime_error("No data with key '" + key + "'");
     }
-    return found->second;
+    std::string result;
+    if (!absl::Base64Unescape(found->second, &result)) {
+        throw std::runtime_error("Corrupted data");
+    }
+    return result;
 }

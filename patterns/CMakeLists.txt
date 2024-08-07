@@ -55,8 +55,16 @@ if (WIN32)
     )
     FetchContent_MakeAvailable(nlohmann)
 
-    add_executable(secure_storage secure_storage/main.cpp secure_storage/json_storage.cpp)
-    target_link_libraries(secure_storage PRIVATE absl::flags_parse nlohmann_json::nlohmann_json)
+    add_executable(secure_storage
+        secure_storage/main.cpp
+        secure_storage/json_storage.cpp
+        secure_storage/encrypted_storage.cpp)
+    target_link_libraries(secure_storage PRIVATE
+        absl::cleanup
+        absl::flags_parse
+        absl::strings
+        nlohmann_json::nlohmann_json
+        Crypt32.lib)
 endif()
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
