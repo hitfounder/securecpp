@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
     try
     {
         if (operation == "read") {
-            std::cout << "Got secret for a key '" << key << "': " << storage->Read(key) << std::endl;
+            std::cout << "Reading secret for a key '" << key << "': " << storage->Read(key) << std::endl;
         } else if (operation == "write") {
             storage->Write(key, value);
             std::cout << "Secret for a key '"<< key << "' has been written" << std::endl;

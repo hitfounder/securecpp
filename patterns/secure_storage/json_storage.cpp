@@ -28,19 +28,18 @@ void JsonStorage::FromJson() {
 void JsonStorage::ToJson() {
     json j;
     j[DataSectionName] = m_data;
-    std::ofstream f{JsonFilePath};
-    f << j.dump();
+    std::ofstream(JsonFilePath) << j.dump();
 }
 
-void JsonStorage::Write(std::string_view key, std::string_view value) {
-    m_data[std::string(key)] = std::string(value);
+void JsonStorage::Write(const std::string& key, const std::string& value) {
+    m_data[key] = value;
     ToJson();
 }
 
-std::string_view JsonStorage::Read(std::string_view key) const {
-    const auto found{m_data.find(std::string(key))};
+std::string JsonStorage::Read(const std::string& key) const {
+    const auto found{m_data.find(key)};
     if (found == std::end(m_data)) {
-        throw std::runtime_error("No data with key '" + std::string(key) + "'");
+        throw std::runtime_error("No data with key '" + key + "'");
     }
     return found->second;
 }

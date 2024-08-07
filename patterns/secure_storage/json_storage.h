@@ -8,8 +8,8 @@ class JsonStorage : public Storage
 {
 public:
     JsonStorage();
-    void Write(std::string_view key, std::string_view value) override;
-    std::string_view Read(std::string_view key) const override;
+    void Write(const std::string& key, const std::string& value) override;
+    std::string Read(const std::string& key) const override;
 
 private:
     void FromJson();

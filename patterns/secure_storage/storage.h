@@ -1,11 +1,11 @@
 #pragma once
 
-#include <string_view>
+#include <string>
 
 class Storage
 {
 public:
     virtual ~Storage() {}
-    virtual void Write(std::string_view key, std::string_view value) = 0;
-    virtual std::string_view Read(std::string_view key) const = 0;
+    virtual void Write(const std::string& key, const std::string& value) = 0;
+    virtual std::string Read(const std::string& key) const = 0;
 };
