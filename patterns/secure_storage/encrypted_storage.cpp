@@ -1,6 +1,7 @@
 #include "encrypted_storage.h"
 
 #include <absl/cleanup/cleanup.h>
+#include <sha256.h>
 
 #include <windows.h>
 
@@ -8,17 +9,22 @@
 
 namespace
 {
-    std::string Encrypt(const std::string& plaintext, const std::string& entropy) {
-        DATA_BLOB input;
-        input.pbData = const_cast<BYTE*>(reinterpret_cast<const BYTE*>(plaintext.data()));
-        input.cbData = static_cast<DWORD>(plaintext.length());
-
+    inline DATA_BLOB ToDataBlob(const std::string& str) {
+        DATA_BLOB blob;
+        blob.pbData = const_cast<BYTE*>(reinterpret_cast<const BYTE*>(str.data()));
+        blob.cbData = static_cast<DWORD>(str.length());
+        return blob;
+    }
+    
+    std::string Encrypt(const std::string& plaintext, const std::string& key) {
+        DATA_BLOB input{ToDataBlob(plaintext)};
+        DATA_BLOB entropy{ToDataBlob(key)};
         DATA_BLOB output;
         const BOOL result = ::CryptProtectData(
             /*pDataIn=*/&input,
             /*szDataDescr=*/
             L"This is the description string.",
-            /*pOptionalEntropy=*/nullptr,
+            /*pOptionalEntropy=*/&entropy,
             /*pvReserved=*/nullptr,
             /*pPromptStruct=*/nullptr,
             /*dwFlags=*/CRYPTPROTECT_AUDIT,
@@ -35,13 +41,19 @@ namespace
         return ciphertext;
     }
 
-    std::string Decrypt(const std::string& ciphertext, const std::string& entropy) {
-        DATA_BLOB input;
-        input.pbData = const_cast<BYTE*>(reinterpret_cast<const BYTE*>(ciphertext.data()));
-        input.cbData = static_cast<DWORD>(ciphertext.length());
-
+    std::string Decrypt(const std::string& ciphertext, const std::string& key) {
+        DATA_BLOB input{ToDataBlob(ciphertext)};
+        DATA_BLOB entropy{ToDataBlob(key)};
         DATA_BLOB output;
-        const BOOL result = CryptUnprotectData(&input, nullptr, nullptr, nullptr, nullptr, 0, &output);
+        const BOOL result = CryptUnprotectData(
+            /*pDataIn=*/&input,
+            /*szDataDescr=*/nullptr,
+            /*pOptionalEntropy=*/&entropy,
+            /*pvReserved=*/nullptr,
+            /*pPromptStruct=*/nullptr,
+            /*dwFlags=*/0,
+            /*pDataOut=*/&output);
+
         if (!result) {
             throw std::runtime_error("Failed to decrypt");
         }
@@ -54,8 +66,9 @@ namespace
     }
 
     std::string Hash(const std::string& value) {
-        // TODO:
-        return value;
+        static const char salt[] = {"my_super_salt"};
+        SHA256 sha256;
+        return sha256(value + salt);
     }
 } // namespace
 

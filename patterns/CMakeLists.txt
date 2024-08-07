@@ -54,17 +54,25 @@ if (WIN32)
         GIT_SHALLOW ON
     )
     FetchContent_MakeAvailable(nlohmann)
+    FetchContent_Declare(hash-library
+        GIT_REPOSITORY "https://github.com/stbrumme/hash-library.git"
+        GIT_TAG "hash_library_v8"
+        GIT_SHALLOW ON
+    )
+    FetchContent_MakeAvailable(hash-library)
 
     add_executable(secure_storage
         secure_storage/main.cpp
         secure_storage/json_storage.cpp
-        secure_storage/encrypted_storage.cpp)
+        secure_storage/encrypted_storage.cpp
+        ${hash-library_SOURCE_DIR}/sha256.cpp)
     target_link_libraries(secure_storage PRIVATE
         absl::cleanup
         absl::flags_parse
         absl::strings
         nlohmann_json::nlohmann_json
         Crypt32.lib)
+    target_include_directories(secure_storage PRIVATE ${hash-library_SOURCE_DIR})
 endif()
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

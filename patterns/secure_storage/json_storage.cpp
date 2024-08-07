@@ -12,7 +12,7 @@ namespace
 {
     const std::filesystem::path JsonFilePath{std::filesystem::temp_directory_path() / "data.json"};
     const char DataSectionName[] = {"data"};
-}
+} // namespace
 
 JsonStorage::JsonStorage() {
     FromJson();
@@ -29,7 +29,7 @@ void JsonStorage::FromJson() {
 void JsonStorage::ToJson() {
     json j;
     j[DataSectionName] = m_data;
-    std::ofstream(JsonFilePath) << j.dump();
+    std::ofstream(JsonFilePath) << j.dump(4);
 }
 
 void JsonStorage::Write(const std::string& key, const std::string& value) {
@@ -40,7 +40,7 @@ void JsonStorage::Write(const std::string& key, const std::string& value) {
 std::string JsonStorage::Read(const std::string& key) const {
     const auto found{m_data.find(absl::Base64Escape(key))};
     if (found == std::end(m_data)) {
-        throw std::runtime_error("No data with key '" + key + "'");
+        throw std::runtime_error("No data");
     }
     std::string result;
     if (!absl::Base64Unescape(found->second, &result)) {
