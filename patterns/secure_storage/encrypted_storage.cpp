@@ -20,7 +20,8 @@ namespace
             L"This is the description string.",
             /*pOptionalEntropy=*/nullptr,
             /*pvReserved=*/nullptr,
-            /*pPromptStruct=*/nullptr, /*dwFlags=*/CRYPTPROTECT_AUDIT,
+            /*pPromptStruct=*/nullptr,
+            /*dwFlags=*/CRYPTPROTECT_AUDIT,
             /*pDataOut=*/&output);
 
         if (!result) {
