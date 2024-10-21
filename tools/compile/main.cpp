@@ -32,6 +32,12 @@ int main() {
         }
     }
 
+    // Implicit initialization with zeros with option trivial-auto-var-init=zero
+    {
+        int val;
+        std::cout << val << std::endl;
+    }
+
     // Will terminate at runtime: *** buffer overflow detected ***: terminated
     // GCC will also warn: -Wstringop-overflow, -Warray-bounds
     {

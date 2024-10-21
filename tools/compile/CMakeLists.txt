@@ -9,15 +9,15 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} \
                     -D_GLIBCXX_ASSERTIONS \
                     -fstack-clash-protection -fstack-protector-strong \
                     -fPIE \
-                    -fcf-protection=full -fno-delete-null-pointer-checks -fno-strict-overflow -fno-strict-aliasing -fexceptions")
+                    -fcf-protection=full -fno-delete-null-pointer-checks -fno-strict-overflow -fno-strict-aliasing")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
                             -pie \
                             -Wl,-z,nodlopen -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -Wl,--no-copy-dt-needed-entries")
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 12)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wbidi-chars=any")
     if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 12)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wtrampolines")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wtrampolines -ftrivial-auto-var-init=zero")
     endif()
 endif()
 
