@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     const auto end(str.end());
 
     str.insert(end, 200, '+');
-    str.insert(begin, 200, '-');
+    str.insert(begin, 200, '-');  // Invalid iterator here, will be stack or heap overflow
     std::cout << str << std::endl;
     return 0;
 }
