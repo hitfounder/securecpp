@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(CMAKE_BUILD_TYPE MATCHES "asan")
-    add_compile_options(-fsanitize=address)
+    add_compile_options(-fsanitize=address -g -O0)
     add_link_options(-fsanitize=address)
 endif()
 
