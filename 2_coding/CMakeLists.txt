@@ -45,9 +45,9 @@ add_executable(smart_ptr_array memory/smart_ptr_array.cpp)
 add_executable(smart_ptr_dangling memory/smart_ptr_dangling.cpp)
 add_executable(alloca memory/alloca.cpp)
 
-add_executable(init initialization/init.cpp)
-add_executable(global_ub initialization/global_ub2.cpp initialization/global_ub1.cpp)
-add_executable(narrowing initialization/narrowing.cpp initialization/narrowing.cpp)
+add_executable(init 2_3_initialization/2_3_1_init/init.cpp)
+add_executable(global_ub 2_3_initialization/2_3_1_init/global_ub2.cpp 2_3_initialization/2_3_1_init/global_ub1.cpp)
+add_executable(narrowing 2_3_initialization/2_3_2_narrowing/narrowing.cpp)
 
 add_executable(unsigned 2_4_arithmetics/2_4_1_unsigned/unsigned.cpp)
 target_link_libraries(unsigned GTest::gtest_main)
