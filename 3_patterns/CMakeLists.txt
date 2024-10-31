@@ -27,18 +27,18 @@ FetchContent_Declare(abseil
 )
 FetchContent_MakeAvailable(abseil)
 
-add_executable(single_use_object single_use_object/main.cpp)
+add_executable(single_use_object 3_2_1_single_use_object/main.cpp)
 target_link_libraries(single_use_object PRIVATE spdlog::spdlog_header_only)
 
-add_executable(value_object value_object/main.cpp)
+add_executable(value_object 3_2_3_value_object/main.cpp)
 
-add_executable(secure_logging secure_logging/main.cpp)
+add_executable(secure_logging 3_2_4_secure_logging/main.cpp)
 target_link_libraries(secure_logging PRIVATE spdlog::spdlog_header_only absl::strings)
 
 if (UNIX)
-    add_executable(sandboxing sandboxing/main.cpp)
+    add_executable(sandboxing 3_2_8_sandboxing/main.cpp)
 
-    add_executable(policy policy/main.cpp)
+    add_executable(policy 3_2_10_policy/main.cpp)
     include(CheckSeLinux)
     CheckSELinux()
     if (DEFINED SELINUX_FOUND)
@@ -62,9 +62,9 @@ if (WIN32)
     FetchContent_MakeAvailable(hash-library)
 
     add_executable(secure_storage
-        secure_storage/main.cpp
-        secure_storage/json_storage.cpp
-        secure_storage/encrypted_storage.cpp
+        3_2_11_secure_storage/main.cpp
+        3_2_11_secure_storage/json_storage.cpp
+        3_2_11_secure_storage/encrypted_storage.cpp
         ${hash-library_SOURCE_DIR}/sha256.cpp)
     target_link_libraries(secure_storage PRIVATE
         absl::cleanup

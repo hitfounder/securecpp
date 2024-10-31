@@ -1,5 +1,5 @@
-#include "../single_use_object/secure_data.h"
-#include "../single_use_object/single_use.h"
+#include "../3_2_1_single_use_object/secure_data.h"
+#include "../3_2_1_single_use_object/single_use.h"
 
 #include <string>
 
