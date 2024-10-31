@@ -67,9 +67,9 @@ add_executable(multiple_locks threading/multiple_locks.cpp)
 add_executable(recursive_lock threading/recursive_lock.cpp)
 add_executable(endless_wait threading/endless_wait.cpp)
 
-add_executable(paths files/paths.cpp)
+add_executable(paths 2_6_files/2_6_1_paths/paths.cpp)
 target_link_libraries(paths GTest::gtest_main)
-add_executable(races files/races.cpp)
+add_executable(races 2_6_files/2_6_2_races/races.cpp)
 target_link_libraries(races llfio_sl)
 
 add_executable(hash 2_7_crypto/2_7_3_hashing/hash.cpp)
