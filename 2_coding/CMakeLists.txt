@@ -60,12 +60,12 @@ add_executable(type_conversion 2_4_arithmetics/2_4_4_conversion/type_conversion.
 add_executable(floats 2_4_arithmetics/2_4_5_floats/floats.cpp)
 target_link_libraries(floats GTest::gtest_main)
 
-add_executable(terminate threading/terminate.cpp)
-add_executable(shared_ptr threading/shared_ptr.cpp)
-add_executable(stack_race_condition threading/stack_race_condition.cpp)
-add_executable(multiple_locks threading/multiple_locks.cpp)
-add_executable(recursive_lock threading/recursive_lock.cpp)
-add_executable(endless_wait threading/endless_wait.cpp)
+add_executable(terminate 2_5_threading/2_5_1_termination/terminate.cpp)
+add_executable(shared_ptr 2_5_threading/2_5_2_synchronization/shared_ptr.cpp)
+add_executable(stack_race_condition 2_5_threading/2_5_2_synchronization/stack_race_condition.cpp)
+add_executable(multiple_locks 2_5_threading/2_5_3_deadlocks/multiple_locks.cpp)
+add_executable(recursive_lock 2_5_threading/2_5_3_deadlocks/recursive_lock.cpp)
+add_executable(endless_wait 2_5_threading/2_5_3_deadlocks/endless_wait.cpp)
 
 add_executable(paths 2_6_files/2_6_1_paths/paths.cpp)
 target_link_libraries(paths GTest::gtest_main)
