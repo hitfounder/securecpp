@@ -14,5 +14,6 @@ int main() {
     foo(str);
     str.remove_suffix(5);
     foo(str);
+    foo(str.substr(5));
     return 0;
 }
