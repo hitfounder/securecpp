@@ -26,10 +26,13 @@ public:
         return m_stack.empty();
     }
 
-    void checkAndPop() {
+    bool checkAndPop() {
         std::lock_guard lock(m_lock);
-        if (!m_stack.empty())
+        if (!m_stack.empty()) {
             m_stack.pop();
+            return true;
+        }
+        return false;
     }
 
 private:
@@ -47,7 +50,7 @@ int main() {
         //while (!gStack.empty()) {
         //    gStack.pop();
         //}
-        gStack.checkAndPop();
+        while (gStack.checkAndPop()) {}
     };
 
     std::vector<std::thread> threads;
