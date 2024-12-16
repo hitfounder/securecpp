@@ -21,11 +21,12 @@ public:
         std::swap(val, temp.val);
         return *this;
     }
-    AFixed(AFixed&& other) {
+    AFixed(AFixed&& other) noexcept {
         val = other.val;
         other.val = nullptr;
     }
-    AFixed& operator=(AFixed&& other) {
+    AFixed& operator=(AFixed&& other) noexcept {
+        delete val;
         val = other.val;
         other.val = nullptr;
         return *this;
