@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <assert.h>
 
 class A {
 public:
@@ -14,9 +15,10 @@ class AFixed {
 public:
     AFixed() : val(new int) {}
     AFixed(const AFixed& other) {
+        assert(other.val);
         val = new int(*other.val);
     }
-    AFixed& operator=(AFixed& other) {
+    AFixed& operator=(const AFixed& other) {
         AFixed temp(other);
         std::swap(val, temp.val);
         return *this;
