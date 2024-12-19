@@ -35,6 +35,7 @@ add_executable(out_of_range 2_1_strings/2_1_3_out_of_bounds/out_of_range.cpp)
 add_executable(string_view_dangling 2_1_strings/2_1_5_string_view/string_view_dangling.cpp)
 add_executable(string_view_null_termination 2_1_strings/2_1_5_string_view/string_view_null_termination.cpp)
 add_executable(sso_stack_overflow 2_1_strings/2_1_4_sso/sso_stack_overflow.cpp)
+add_executable(string_size 2_1_strings/2_1_6_size/size.cpp)
 
 add_executable(uaf_temporary 2_2_memory/2_2_2_use_after_free/uaf_temporary.cpp)
 add_executable(delete 2_2_memory/2_2_3_new_and_delete/delete.cpp)
