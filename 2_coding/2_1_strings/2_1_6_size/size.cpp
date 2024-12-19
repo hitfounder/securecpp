@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#define COUNTOF_C(array) (sizeof(array) / sizeof(array[0]))
+#define COUNTOF_C(arr) (sizeof(arr) / sizeof(arr[0]))
 
 template <typename T, size_t N>
 char (&ArraySizeHelper(T (&array)[N]))[N];
