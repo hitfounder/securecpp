@@ -29,7 +29,7 @@ struct SaferBar {
     int j = 0;
 };
 
-void fooDefaultInitization() {
+void DefaultInitization() {
     int i;
     char buff[10];
     Bar bar;
@@ -46,7 +46,7 @@ void fooDefaultInitization() {
     std::cout << safeBar.i << " " << saferBar.i << " " << std::endl;
 }
 
-void fooValueInitization() {
+void ValueInitization() {
     int i{};
     char buff[10]{};
     Bar bar = Bar();
@@ -61,14 +61,14 @@ void fooValueInitization() {
     delete [] buffDyn;
 }
 
-void fooVexingParse() {
+void VexingParse() {
     int i();
 
     // 1 - address of function will be implicitly converted to bool
     std::cout << i << std::endl;
 }
 
-void fooDirectInitization() {
+void DirectInitization() {
     int i{1};
     char *c = new char('2');
 
@@ -77,7 +77,7 @@ void fooDirectInitization() {
     delete c;
 }
 
-void fooCopyInitization() {
+void CopyInitization() {
     int i = 1;
     char buff[10] = {'2', '3', '4'};
 
@@ -85,7 +85,7 @@ void fooCopyInitization() {
     std::cout << i << " " << buff << std::endl;
 }
 
-void fooAgregateInitization() {
+void AgregateInitization() {
     Bar bar1{1,2};
     Bar bar2 = {3, 4};
     Bar bar3 = {.i = 5, .j = 6};
@@ -100,7 +100,7 @@ int globalVal;
 Bar globalBar;
 char globalBuff[10];
 
-void fooStaticInitization() {
+void StaticInitization() {
     static int localStatic;
     static Bar localStaticBar;
     static char localStaticBuff[10];
@@ -111,14 +111,14 @@ void fooStaticInitization() {
     std::cout << localStatic << " " << localStaticBar.i << " " << localStaticBuff << std::endl;
 }
 
-void fooUniversalInitialization() {
+void UniversalInitialization() {
     std::string s1(49, '2');
     std::string s2{49, '2'};
     // 2222222222222222222222222222222222222222222222222 12
     std::cout << s1 << " " << s2 << std::endl;
 }
 
-void fooAutoInitialization() {
+void AutoInitialization() {
     auto i = 10;
     auto ui = 100u;
     auto s = std::string{"string"};
@@ -138,30 +138,30 @@ void fooAutoInitialization() {
 
 int main() {
     std::cout << "Default initization" << std::endl;
-    fooDefaultInitization();
+    DefaultInitization();
 
     std::cout << "Value initization" << std::endl;
-    fooValueInitization();
+    ValueInitization();
 
     std::cout << "Vexing parse" << std::endl;
-    fooVexingParse();
+    VexingParse();
 
     std::cout << "Direct initization" << std::endl;
-    fooDirectInitization();
+    DirectInitization();
 
     std::cout << "Copy initization" << std::endl;
-    fooCopyInitization();
+    CopyInitization();
 
     std::cout << "Agregate initization" << std::endl;
-    fooAgregateInitization();
+    AgregateInitization();
 
     std::cout << "Static initization" << std::endl;
-    fooStaticInitization();
+    StaticInitization();
 
     std::cout << "Universal initialization" << std::endl;
-    fooUniversalInitialization();
+    UniversalInitialization();
 
     std::cout << "Auto initialization" << std::endl;
-    fooAutoInitialization();
+    AutoInitialization();
     return 0;
 }

@@ -4,7 +4,7 @@
 #pragma GCC diagnostic ignored "-Wliteral-conversion"
 #pragma GCC diagnostic ignored "-Wconstant-conversion"
 
-void foo() {
+void type_conversion() {
     int i = 20.10;  // Warning: -Wliteral-conversion
     unsigned int ui = -10;
     short s = 2147483647;  // Warning: -Wconstant-conversion
@@ -13,7 +13,7 @@ void foo() {
     std::cout << i << " " << ui << " " << s << std::endl;
 }
 
-void bar() {
+void universal_initialization_type_conversion() {
    /*
     // Error: -Wc++11-narrowing
     int i{20.10};
@@ -34,7 +34,7 @@ void bar() {
     std::cout << ci << " " << ui << " " << s << std::endl;
 }
 
-void qux() {
+void explicit_narrowing() {
     float f{20};
     int i1 {static_cast<int>(f)};
     int i2 {gsl::narrow_cast<int>(f)};
@@ -50,8 +50,8 @@ void qux() {
 }
 
 int main() {
-    foo();
-    bar();
-    qux();
+    type_conversion();
+    universal_initialization_type_conversion();
+    explicit_narrowing();
     return 0;
 }

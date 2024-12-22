@@ -1,11 +1,11 @@
 #include <string>
 
-void foo(std::string& str) {
+void change_last_symbol(std::string& str) {
     str.back() = '!';
 }
 
 int main() {
     std::string str{"hello"};
-    foo(str);
+    change_last_symbol(str);
     return 0;
 }
