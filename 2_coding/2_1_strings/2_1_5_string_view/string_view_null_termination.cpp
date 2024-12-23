@@ -4,9 +4,19 @@
 #include <string>
 
 void print_legths(std::string_view str) {
-    std::cout << "string view actual length: " << str.length() << std::endl;
-    std::cout << "strlen with string view: " << std::strlen(str.data()) << std::endl;
-    std::cout << "strlen with string: " << std::strlen(std::string(str).c_str()) << std::endl;
+    std::cout << "\""<< str <<"\"" << std::endl;
+    std::cout
+        << "string view actual length: "
+        << str.length()
+        << std::endl;
+    std::cout
+        << "strlen with string view: "
+        << std::strlen(str.data())
+        << std::endl;
+    std::cout
+        << "strlen with string: "
+        << std::strlen(std::string(str).c_str())
+        << std::endl;
 }
 
 int main() {
