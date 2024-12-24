@@ -24,13 +24,11 @@ public:
         return *this;
     }
     AFixed(AFixed&& other) noexcept {
-        val = other.val;
-        other.val = nullptr;
+        val = std::exchange(other.val, nullptr);
     }
     AFixed& operator=(AFixed&& other) noexcept {
         delete val;
-        val = other.val;
-        other.val = nullptr;
+        val = std::exchange(other.val, nullptr);
         return *this;
     }
     ~AFixed() {
